@@ -33,6 +33,7 @@ function SearchHistory({
         History
       </Heading>
       <Table>
+        <tbody>
         <tr>
           <Thead>name</Thead>
           <Thead>time</Thead>
@@ -62,6 +63,7 @@ function SearchHistory({
               </tr>
             );
           })}
+          </tbody>
       </Table>
     </Container>
   );

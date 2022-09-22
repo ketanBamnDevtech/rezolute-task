@@ -25,9 +25,12 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
   const [userInput, setUserInput] = useState<string>("");
 
   useEffect(() => {
+    console.log(userName);
+    
     if (userName) {
       setUserInput(userName);
       fetchUser(userName);
+      console.log("inside")
     }
   }, [userName]);
 
@@ -41,6 +44,7 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
       }
       setEmpty(false);
       fetchUser(userInput);
+      setUserInput("");
     },
     [userInput]
   );
@@ -50,12 +54,12 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
     [userInput, setUserInput]
   );
 
-  async function fetchUser(name: string) {
+  function fetchUser(name: string) {
     const errorHandler = (error: any) => {
       if (error.response && error.response.data) {
         const errorMsg = error.response.data.message;
         const status = error.response.request.status;
-        toast.error(`${errorMsg} with ${status}`);
+        toast.error(`user not found`);
       }
       setNotFound(true);
       setUser(null);
@@ -82,7 +86,7 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
       };
       setNotFound(false);
       setUser(user);
-      toast.success("user Found");
+      toast.success("user found");
     };
     getUser(name, callBack, errorHandler);
   }
