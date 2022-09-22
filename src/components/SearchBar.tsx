@@ -25,8 +25,6 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
   const [userInput, setUserInput] = useState<string>("");
 
   useEffect(() => {
-    console.log(userName);
-    
     if (userName) {
       setUserInput(userName);
       fetchUser(userName);
