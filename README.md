@@ -1,16 +1,16 @@
-# Technologies used:
-- ReactJs
-- Typescript
-- Styled Components
-
-# Details for setup: 
-
 ## System Requirements
 - NodeJs v14 or above
 
+# Technologies:
+- ReactJs
+- Styled Components
+- Typescript
+
+
+# Details for setup: 
 ## Steps for setup:
-> git clone 
-> cd 
+> git clone https://github.com/ketanBamnDevtech/rezolute-task.git
+> cd rezolute-task
 > npm install
 > npm start
 
@@ -26,27 +26,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 - Table-view to store user-search history with search time.
 - can revisit particular-user by clicking on name field on the table.
 - User can remove/delete by clicking on delete icon/button.
-
-### Other Details:
-1. React/Hooks implemented:
+3. Used react functional components 
+4. Used Hooks:
+- useState
 - useEffect
-- useState 
-- useCallback
 - useParams
+- useCallback  
 
-2. Code Structure:
-- pages : contains pages
-- components : reusable componenets
-- utils: contains files & sub-folder :
--- api : for api's
--- styles : for styles
--- Files: colors & formatter
-- types: contains types
-- Created seperate folder for types & styles , for scalability.
+# Application folder structure:
+> src:
+- pages
+- components
+- types
+- utils: 
+    -- api : for api's
+    -- styles : for styles
+    -- Files: colors & formatter
 
-5. Error handling
-- callback & error-handler function for error handling and response.
+- Created seperate folder for types & styles.
+
+# Error handling
+- callback & errorhandler function for error handling and response.
 - react-tostify for api's success/error. notification.
 
-6. Responsive
--  responsive for mobile , tablets & desktop.
+# Responsive for mobile , tablet & desktop.
