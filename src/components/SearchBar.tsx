@@ -3,7 +3,7 @@ import { UserProps } from "../types";
 import { joinedDate } from "../utils/formatter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { getUser } from "../utils/apis/fetchData";
+import { getUser } from "../utils/apis/fetchUserDetails";
 import {
   Container,
   Input,
@@ -25,7 +25,10 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
   const [userInput, setUserInput] = useState<string>("");
 
   useEffect(() => {
-    userName && fetchUser(userName);
+    if (userName) {
+      setUserInput(userName);
+      fetchUser(userName);
+    }
   }, [userName]);
 
   const handleSubmit = useCallback(
@@ -49,11 +52,10 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
 
   async function fetchUser(name: string) {
     const errorHandler = (error: any) => {
-      // If ther user is not found
       if (error.response && error.response.data) {
         const errorMsg = error.response.data.message;
         const status = error.response.request.status;
-        toast.error(`${errorMsg} with ${status}`, { position: toast.POSITION.TOP_CENTER });
+        toast.error(`${errorMsg} with ${status}`);
       }
       setNotFound(true);
       setUser(null);
@@ -80,7 +82,7 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
       };
       setNotFound(false);
       setUser(user);
-      toast.success("user Found", { position: toast.POSITION.TOP_CENTER });
+      toast.success("user Found");
     };
     getUser(name, callBack, errorHandler);
   }
@@ -96,7 +98,7 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
           name="username"
           id="username"
           type="text"
-          value={userName ? userName : userInput}
+          value={userInput}
           onChange={onChangeInput}
           placeholder="Search username ..."
         />

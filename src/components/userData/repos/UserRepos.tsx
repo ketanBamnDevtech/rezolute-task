@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import { RepoType, UserDataProps } from "../../../types";
-import { getUserRepos } from "../../../utils/apis/fetchData";
+import { getUserRepos } from "../../../utils/apis/fetchUserDetails";
 import { joinedDate } from "../../../utils/formatter";
-import { Card, CardBody, CardSubtitle, CardTitle, Container, Head } from "../../../utils/styles/components/repo";
+import {
+  Card,
+  CardBody,
+  CardSubtitle,
+  CardTitle,
+  Container,
+  Head,
+} from "../../../utils/styles/components/repo";
+import { toast } from "react-toastify";
 
 export const UserRepos = ({ user }: UserDataProps) => {
   const [repos, setRepos] = useState<RepoType[]>([]);
@@ -10,15 +18,13 @@ export const UserRepos = ({ user }: UserDataProps) => {
   useEffect(() => {
     const callBack = ({ data }: any) => {
       setRepos(data);
-      //toast ....
-
     };
 
     const errorHandler = (error: any) => {
       if (error.response && error.response.data) {
         const errorMsg = error.response.data.error;
+        toast.error(errorMsg);
       }
-      //toast ....
     };
 
     getUserRepos(user.login, callBack, errorHandler);
@@ -51,4 +57,3 @@ export const UserRepos = ({ user }: UserDataProps) => {
     </Container>
   );
 };
-

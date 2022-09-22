@@ -21,6 +21,9 @@ export const Container = styled.main`
 export const Heading = styled.h2`
   text-align: center;
   color: #fcf;
+  svg {
+    padding-right: 5px
+}
 `;
 
 export const Table = styled.table`

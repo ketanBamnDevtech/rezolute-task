@@ -23,7 +23,7 @@ function SearchHistory({
 }: SearchHistoryprops) {
   const deleteUserHistory = (item: userHistory) => {
     setUserSearchHistory((d) => d.filter((data) => data.id !== item.id));
-    toast.success("deleted", { position: toast.POSITION.TOP_CENTER });
+    toast.success("deleted");
   };
   return (
     <Container>
