@@ -4,7 +4,15 @@ import { joinedDate } from "../utils/formatter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { getUser } from "../utils/apis/fetchData";
-import { Container, Input, InputArea, InputLabel, SubmitBtn, Warn } from "../utils/styles/components/searchBar";
+import {
+  Container,
+  Input,
+  InputArea,
+  InputLabel,
+  SubmitBtn,
+  Warn,
+} from "../utils/styles/components/searchBar";
+import { toast } from "react-toastify";
 
 type SearchbarProps = {
   setUser: (user: UserProps | null) => void;
@@ -41,13 +49,12 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
 
   async function fetchUser(name: string) {
     const errorHandler = (error: any) => {
-      //error...
       // If ther user is not found
       if (error.response && error.response.data) {
-        const errorMsg = error.response.data.error;
+        const errorMsg = error.response.data.message;
+        const status = error.response.request.status;
+        toast.error(`${errorMsg} with ${status}`, { position: toast.POSITION.TOP_CENTER });
       }
-      //toast ....
-
       setNotFound(true);
       setUser(null);
     };
@@ -73,7 +80,7 @@ export const SearchBar = ({ setUser, userName }: SearchbarProps) => {
       };
       setNotFound(false);
       setUser(user);
-      //toast ....
+      toast.success("user Found", { position: toast.POSITION.TOP_CENTER });
     };
     getUser(name, callBack, errorHandler);
   }

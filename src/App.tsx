@@ -5,6 +5,9 @@ import { useState } from "react";
 import { UserProps } from "./types";
 import SearchHistory from "./pages/SearchHistory";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export type userHistory = {
   id: number | undefined;
   username: string | undefined;
@@ -25,33 +28,35 @@ function App() {
         date: new Date(),
       };
       const checkHistory = userSearchHistory.filter((h) => h.id !== user?.id);
-        setUserSearchHistory([...checkHistory, history]);
-    
+      setUserSearchHistory([...checkHistory, history]);
     }
   }
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={<SearchUser setUserData={setUserData} user={user} />}
-        />
-        <Route
-          path="/:sname"
-          element={<SearchUser setUserData={setUserData} user={user} />}
-        />
-        <Route
-          path="/history"
-          element={
-            <SearchHistory
-              userSearchHistory={userSearchHistory}
-              setUserSearchHistory={setUserSearchHistory}
-            />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={<SearchUser setUserData={setUserData} user={user} />}
+          />
+          <Route
+            path="/:sname"
+            element={<SearchUser setUserData={setUserData} user={user} />}
+          />
+          <Route
+            path="/history"
+            element={
+              <SearchHistory
+                userSearchHistory={userSearchHistory}
+                setUserSearchHistory={setUserSearchHistory}
+              />
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import { faClockRotateLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { userHistory } from "../App";
+import { toast } from "react-toastify";
 import {
   Container,
   Heading,
@@ -11,13 +12,19 @@ import {
   Thead,
 } from "../utils/styles/pages/history";
 
+type SearchHistoryprops = {
+  userSearchHistory: userHistory[];
+  setUserSearchHistory: React.Dispatch<React.SetStateAction<userHistory[]>>;
+};
+
 function SearchHistory({
   userSearchHistory,
   setUserSearchHistory,
-}: {
-  userSearchHistory: userHistory[];
-  setUserSearchHistory: React.Dispatch<React.SetStateAction<userHistory[]>>;
-}) {
+}: SearchHistoryprops) {
+  const deleteUserHistory = (item: userHistory) => {
+    setUserSearchHistory((d) => d.filter((data) => data.id !== item.id));
+    toast.success("deleted", { position: toast.POSITION.TOP_CENTER });
+  };
   return (
     <Container>
       <Heading>
@@ -46,11 +53,7 @@ function SearchHistory({
                 <TableData>
                   <TextHover
                     className="m-1"
-                    onClick={() => {
-                      setUserSearchHistory((d) =>
-                        d.filter((data) => data.id !== item.id)
-                      );
-                    }}
+                    onClick={() => deleteUserHistory(item)}
                   >
                     {" "}
                     <FontAwesomeIcon icon={faTrash} color="red" />{" "}
